@@ -1,0 +1,1551 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   ZebraMotif interface palette from biohub.org and zebrahub.sf.czbiohub.org.
+   Biohub names its purple shades periwinkle, periwinkle-dark, periwinkle-light,
+   and iris; its near-black is used for text and inverse surfaces.
+   ────────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Colors named in Biohub's official website theme. */
+  --biohub-periwinkle:       #6E4FF9;
+  --biohub-periwinkle-dark:  #6247E0;
+  --biohub-periwinkle-light: #CEBEF8;
+  --biohub-iris:             #33029C;
+  --biohub-black:            #0D0001;
+  --biohub-black-hover:      #101010;
+
+  /* Semantic roles */
+  --accent:        var(--biohub-black);
+  --accent-hover:  var(--biohub-black-hover);
+  --accent-dark:   var(--biohub-black-hover);
+  --accent-subtle: rgba(13, 0, 1, 0.06);
+  --heading:       var(--biohub-black);
+  --focus-ring:    rgba(13, 0, 1, 0.25);
+  --link:          #0057B8;
+  --link-hover:    #003F88;
+
+  /* Neutrals */
+  --text:        var(--biohub-black);
+  --text-muted:  #63666A;
+  --text-faint:  #63666A;
+  --border:      #E5E5E5;
+  --bg:          #F5F5F5;
+  --surface:     #ffffff;
+
+  --radius:  12px;
+  --shadow:  0 1px 2px rgba(13, 0, 1, 0.06), 0 2px 8px rgba(13, 0, 1, 0.06);
+
+  --bs-primary: var(--biohub-periwinkle-dark);
+  --bs-primary-rgb: 98, 71, 224;
+  --bs-link-color: var(--link);
+  --bs-link-color-rgb: 0, 87, 184;
+  --bs-link-hover-color: var(--link-hover);
+  --bs-link-hover-color-rgb: 0, 63, 136;
+  --bs-body-color: var(--text);
+  --bs-body-bg: var(--bg);
+  --bs-border-color: var(--border);
+  --bs-secondary-color: var(--text-muted);
+  --bs-code-color: var(--biohub-iris);
+}
+
+body {
+  /* Dash dropdowns and their portaled menus inherit these component tokens. */
+  --Dash-Text-Primary: var(--text);
+  --Dash-Text-Strong: var(--text);
+  --Dash-Text-Weak: var(--text-muted);
+  --Dash-Text-Disabled: var(--text-muted);
+  --Dash-Stroke-Strong: #A0A4AC;
+  --Dash-Stroke-Weak: var(--border);
+  --Dash-Fill-Inverse-Strong: var(--surface);
+  --Dash-Fill-Interactive-Strong: var(--accent);
+  --Dash-Fill-Interactive-Weak: var(--accent-subtle);
+  --Dash-Fill-Primary-Hover: rgba(13, 0, 1, 0.04);
+  --Dash-Fill-Primary-Active: var(--accent-subtle);
+  --Dash-Fill-Disabled: rgba(13, 0, 1, 0.10);
+  --Dash-Shading-Strong: rgba(13, 0, 1, 0.35);
+  --Dash-Shading-Weak: rgba(13, 0, 1, 0.20);
+  font-family: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading);
+}
+
+/* Keep the established serif page titles. */
+h1 {
+  font-family: "STIX Two Text", Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+h4 {
+  font-weight: 600;
+}
+
+a:not(.btn):not(.nav-link) {
+  color: var(--link);
+  font-weight: 400;
+  text-decoration: none;
+}
+a:not(.btn):not(.nav-link):is(:hover, :focus) {
+  color: var(--link-hover);
+}
+
+/* ── Sidebar: Biohub near-black with periwinkle navigation accents ─────── */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 11rem;
+  padding: 2rem 1rem;
+  background-color: var(--biohub-black);
+}
+
+.sidebar-title {
+  color: #ffffff;
+  font-family: "STIX Two Text", Georgia, serif;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-left: 0.8rem;
+}
+
+.sidebar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  border-left: 3px solid transparent;
+  border-radius: 0 4px 4px 0;
+  transition: all 0.12s ease-in-out;
+}
+
+.sidebar-nav .nav-link.active {
+  color: #ffffff;
+  font-weight: 600;
+  border-left: 3px solid var(--biohub-periwinkle-light);
+  background-color: var(--biohub-periwinkle-dark) !important;
+}
+
+.sidebar-nav .nav-link:hover {
+  color: #ffffff;
+  background-color: rgba(110, 79, 249, 0.18);
+  border-left: 3px solid var(--biohub-periwinkle-light);
+}
+
+.sidebar-nav .nav-link.active:hover {
+  color: #ffffff;
+  border-left: 3px solid var(--biohub-periwinkle-light);
+  background-color: var(--biohub-periwinkle-dark);
+}
+
+.sidebar-nav .nav-link:focus-visible {
+  outline-color: var(--biohub-periwinkle-light);
+}
+
+#content {
+  margin-left: 12rem;
+  margin-right: 2rem;
+  padding: 2rem 2rem;
+}
+
+/* ── Cards: white surface, soft shadow, no hard grey box ──────────────────── */
+.container {
+  --heading: var(--biohub-black);
+  margin-top: 24px;
+  margin-bottom: 24px;
+  padding: 24px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+/* Panel headings and labels use bold black within the purple page frame. */
+.container :is(h1, h2, h3, h4, h5, h6, .home-example-label, .confidence-metric-title) {
+  font-weight: 700;
+}
+
+/* ── Buttons / focus: Biohub near-black ────────────────────────────────── */
+.btn-primary {
+  --bs-btn-color: #ffffff;
+  --bs-btn-bg: var(--accent);
+  --bs-btn-border-color: var(--accent);
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-bg: var(--accent-hover);
+  --bs-btn-hover-border-color: var(--accent-hover);
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-bg: var(--accent-dark);
+  --bs-btn-active-border-color: var(--accent-dark);
+  --bs-btn-disabled-bg: var(--accent);
+  --bs-btn-disabled-border-color: var(--accent);
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+.btn-primary:active,
+.btn-primary:not(:disabled):not(.disabled):active {
+  background-color: var(--accent-dark) !important;
+  border-color: var(--accent-dark) !important;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--accent);
+  --bs-btn-border-color: var(--accent);
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-bg: var(--accent);
+  --bs-btn-hover-border-color: var(--accent);
+  --bs-btn-active-color: #ffffff;
+  --bs-btn-active-bg: var(--accent-dark);
+  --bs-btn-active-border-color: var(--accent-dark);
+  --bs-btn-disabled-color: var(--accent);
+  --bs-btn-disabled-border-color: var(--accent);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.btn:focus,
+.btn:focus-visible {
+  box-shadow: 0 0 0 0.2rem var(--focus-ring) !important;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid var(--biohub-black);
+  outline-offset: 3px;
+}
+
+.form-check-input:checked {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+.form-check-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem var(--focus-ring);
+}
+
+.form-switch .form-check-input:focus:not(:checked) {
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%230D0001'/%3e%3c/svg%3e");
+}
+
+/* ── Dropdown: match the brand focus ring and rounder control ─────────────── */
+.Select-control,
+.Select--single > .Select-control {
+  border-radius: 8px;
+  border-color: var(--border);
+}
+.is-focused:not(.is-open) > .Select-control {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem var(--focus-ring);
+}
+.Select-menu-outer {
+  border-radius: 0 0 8px 8px;
+  border-color: var(--border);
+}
+.VirtualizedSelectFocusedOption {
+  background-color: var(--accent-subtle);
+}
+
+/* Keep the search menu steady as filtering changes the number of matches. */
+.tf-search-dropdown {
+  color: var(--text);
+  text-align: left;
+}
+
+.tf-search-dropdown .dash-dropdown-content {
+  width: var(--radix-popover-trigger-width);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+  height: min(
+    400px,
+    calc(100vh - 100px),
+    var(--tf-search-menu-available-height, 400px)
+  );
+}
+
+.tf-search-dropdown .dash-dropdown-search-container {
+  flex-shrink: 0;
+}
+
+/* Give the list its full height before Dash measures its virtual viewport. */
+.tf-search-dropdown .dash-dropdown-options {
+  flex: 1;
+  min-height: 0;
+}
+
+.tf-search-dropdown .dash-dropdown-search {
+  min-width: 0;
+}
+
+/* ── Home page ──────────────────────────────────────────────────────────── */
+/* Hero: periwinkle carries the brand color; white text keeps it crisp. */
+.home-hero {
+    --heading: #ffffff;
+    --focus-ring: rgba(255, 255, 255, 0.3);
+    background: var(--biohub-periwinkle-dark);
+    color: #ffffff;
+    border-radius: var(--radius);
+    padding: 1.5rem 2.5rem;
+    margin-top: 8px;
+    margin-bottom: 24px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.home-hero-title {
+    color: var(--heading);
+    font-weight: 700;
+    font-size: 2.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.home-hero-subtitle {
+    color: rgba(255, 255, 255, 0.90);
+    font-size: 1.05rem;
+    max-width: 620px;
+    margin: 0 auto 1rem auto;
+}
+
+.home-hero-search {
+    max-width: 520px;
+    margin: 0 auto 1rem;
+    text-align: left;
+}
+
+.home-hero-search label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+}
+
+/* Stat tiles: KPI row inside the hero. */
+.stat-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.stat-tile {
+    background-color: rgba(13, 0, 1, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 10px;
+    padding: 0.65rem 1.4rem;
+    width: 160px;
+    min-width: 128px;
+}
+
+.stat-value {
+    font-family: "STIX Two Text", Georgia, serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    line-height: 1.1;
+    color: var(--heading);
+}
+
+.stat-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3em;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-top: 4px;
+}
+
+.home-hero-cta .btn {
+    font-weight: 600;
+}
+
+.home-hero-cta .btn:focus-visible {
+    outline-color: #ffffff;
+}
+
+.home-hero-cta .btn-light {
+    --bs-btn-color: #ffffff;
+    --bs-btn-bg: var(--biohub-black);
+    --bs-btn-border-color: var(--biohub-black);
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: var(--accent-dark);
+    --bs-btn-hover-border-color: var(--accent-dark);
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: var(--accent-dark);
+    --bs-btn-active-border-color: var(--accent-dark);
+}
+
+.home-hero-cta .btn-outline-light {
+    --bs-btn-color: #ffffff;
+    --bs-btn-border-color: rgba(255, 255, 255, 0.72);
+    --bs-btn-hover-color: var(--biohub-iris);
+    --bs-btn-hover-bg: #ffffff;
+    --bs-btn-hover-border-color: #ffffff;
+    --bs-btn-active-color: var(--biohub-iris);
+    --bs-btn-active-bg: var(--biohub-periwinkle-light);
+    --bs-btn-active-border-color: var(--biohub-periwinkle-light);
+}
+
+/* One short reading guide above the example. */
+.home-result-guide {
+    font-size: 0.9rem;
+}
+
+.home-result-guide h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.65rem;
+}
+
+.home-result-guide p {
+    margin-bottom: 0.75rem;
+}
+
+/* Query identity and evidence sit beside the primary PWM. */
+.tf-result-header {
+    margin-bottom: 1.25rem;
+}
+
+.tf-result-details {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+#tf-result-name {
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.tf-result-family {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 0.85rem;
+}
+
+.tf-result-query-label {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.035em;
+    margin: 0 0 0.25rem;
+    text-transform: uppercase;
+}
+
+.tf-result-identifiers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.5rem;
+    margin: 0;
+}
+
+.tf-result-identifiers dt {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.tf-result-identifiers dd {
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+.tf-result-note {
+    margin-bottom: 1.25rem;
+}
+
+.tf-representative-notice {
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--biohub-periwinkle-light);
+    border-left: 4px solid var(--biohub-periwinkle-dark);
+    border-radius: 8px;
+    background: rgba(110, 79, 249, 0.06);
+    color: var(--text);
+    overflow-wrap: anywhere;
+}
+
+.tf-representative-heading {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.85rem;
+    margin-bottom: 0.4rem;
+}
+
+.tf-representative-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.tf-representative-label {
+    border: 1px solid var(--biohub-periwinkle-light);
+    border-radius: 4px;
+    padding: 0.15rem 0.4rem;
+    color: var(--biohub-iris);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.tf-representative-description {
+    font-size: 0.9rem;
+    margin: 0 0 0.4rem;
+}
+
+.tf-representative-entry {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.tf-result-actions {
+    min-width: 0;
+    max-width: 26rem;
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+.tf-result-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.tf-result-buttons .btn {
+    flex: 1 1 auto;
+    font-size: 0.85rem;
+    white-space: normal;
+}
+
+.tf-link-status {
+    margin-top: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.tf-result-note:empty,
+.tf-link-status:empty {
+    display: none;
+}
+
+.tf-share-fallback {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+}
+
+.tf-share-fallback input {
+    width: 100%;
+    font-size: inherit;
+}
+
+/* ── JASPAR-style profile (left) + logo (right) layout ─────────────────── */
+.mode-row {
+    margin-top: 14px;
+}
+
+.tf-result-row {
+    margin-top: 0;
+}
+
+.tf-result-row > .profile-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-col {
+    border-right: 1px solid var(--border);
+}
+
+.profile-panel {
+    font-size: 0.85rem;
+}
+
+.profile-badge {
+    margin-bottom: 10px;
+}
+
+.metric-band-trigger {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 6px;
+    max-width: 100%;
+    cursor: help;
+}
+
+.metric-band {
+    font-size: 0.72rem;
+    line-height: 1.15;
+}
+
+.metric-value {
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+
+.metric-value-tooltip .tooltip-inner {
+    max-width: 340px;
+    white-space: normal;
+    text-align: left;
+}
+
+.motif-display-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.75rem;
+}
+
+.motif-orientation-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 0;
+    padding-left: 0;
+    margin-bottom: 0;
+    transform: translateY(2px);
+}
+
+.motif-orientation-control .form-check-input {
+    flex: 0 0 auto;
+    float: none;
+    margin: 0;
+}
+
+.motif-orientation-control .form-check-label {
+    margin-bottom: 0;
+}
+
+.motif-scale-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.motif-scale-options {
+    display: flex;
+}
+
+.motif-scale-options .form-check {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.motif-scale-options .form-check-label {
+    display: block;
+    border-radius: 0;
+}
+
+.motif-scale-options .form-check:first-child .form-check-label {
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.motif-scale-options .form-check:last-child .form-check-label {
+    margin-left: -1px;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.alternate-mode-plot {
+    margin-top: auto;
+}
+
+/* ── Alternate modes across the page beneath the primary mode ──────────── */
+#alternate-section {
+    padding: 16px 20px;
+}
+
+.alternate-modes-description p {
+    margin-bottom: 8px;
+}
+
+.alternate-modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 12px;
+}
+
+.alternate-mode-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.alternate-mode-logo {
+    min-width: 0;
+}
+
+/* Metric bands above each alternate logo. */
+.mode-meta {
+    display: grid;
+    gap: 6px;
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+}
+
+.mode-meta-item {
+    min-width: 0;
+    white-space: normal;
+}
+
+.mode-meta-key {
+    color: var(--text-muted);
+}
+
+.profile-title {
+    font-weight: 700;
+    color: var(--heading);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.profile-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.profile-table td {
+    padding: 5px 4px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+
+.profile-table tr:last-child td {
+    border-bottom: none;
+}
+
+.profile-key {
+    color: var(--text-muted);
+    white-space: normal;
+    width: 7.5rem;
+}
+
+.profile-val {
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* ── Structure and protein-level AF3 confidence ─────────────────────────── */
+.panel-description {
+    color: var(--text-muted);
+    font-size: 0.9em;
+}
+
+.structure-confidence-card {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+    gap: 24px;
+}
+
+/* Hide the shared surface until a result arrives, before Mol* measures its canvas. */
+.structure-confidence-card:not(:has(#structure-content > *, #confidence-content > *)) {
+    display: none;
+}
+
+.structure-confidence-card:has(#structure-content:empty),
+.structure-confidence-card:has(#confidence-content:empty) {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.structure-panel,
+.confidence-panel {
+    min-width: 0;
+}
+
+.structure-color-legend {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.structure-color-key {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.structure-color-swatch {
+    width: 0.8rem;
+    height: 0.8rem;
+    flex: 0 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+}
+
+.structure-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+#expand-structure-viewer {
+    white-space: nowrap;
+}
+
+#structure-content {
+    height: 480px;
+    position: relative;
+}
+
+.confidence-panel {
+    border-left: 1px solid var(--border);
+    padding-left: 24px;
+}
+
+.structure-viewer-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(13, 0, 1, 0.55);
+}
+
+body.structure-viewer-open {
+    overflow: hidden;
+}
+
+.structure-panel.is-expanded {
+    position: fixed;
+    inset: 16px;
+    z-index: 2001;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    overflow: auto;
+}
+
+.structure-panel.is-expanded > :not(#structure-content) {
+    flex: 0 0 auto;
+}
+
+.structure-panel.is-expanded #structure-content {
+    flex: 1 0 160px;
+    height: auto;
+    min-height: 160px;
+}
+
+.confidence-metrics {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+}
+
+.confidence-scope {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+
+.confidence-metric {
+    height: 100%;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg);
+}
+
+.confidence-metric-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--heading);
+}
+
+.confidence-score {
+    margin: 8px 0 4px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--heading);
+}
+
+.confidence-unit {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+.confidence-range {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.confidence-variation {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 12px 0 0;
+}
+
+.confidence-help {
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.confidence-help summary {
+    cursor: pointer;
+    color: var(--accent);
+}
+
+.confidence-help p {
+    margin: 10px 0 0;
+}
+
+/* ── Downloads page table ───────────────────────────────────────────────── */
+.download-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-top: 18px;
+}
+
+.download-table th {
+    text-align: left;
+    color: var(--heading);
+    font-size: 0.85rem;
+    padding: 8px 10px;
+    border-bottom: 2px solid var(--border);
+}
+
+.download-table td {
+    padding: 14px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+
+.download-table th:first-child {
+    width: 34%;
+}
+
+.download-option {
+    min-width: 0;
+}
+
+.download-file-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.6rem;
+}
+
+.download-file-size {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.download-url-copy {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+.download-copy-status {
+    min-height: 1.25em;
+    margin-top: 0.25rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.download-table tr:last-child td {
+    border-bottom: none;
+}
+
+.download-format-details {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.download-format-details summary {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.download-format-details[open] summary {
+    margin-bottom: 0.75rem;
+}
+
+.download-notices {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.download-notices p {
+    margin-bottom: 0;
+}
+
+/* Theme the embedded controls while keeping molecular representation colors. */
+#structure-content .msp-plugin .msp-layout-standard {
+    border-color: var(--border);
+}
+
+#structure-content .msp-plugin .msp-btn {
+    color: var(--accent);
+    background-color: var(--bg);
+}
+
+#structure-content .msp-plugin .msp-btn:hover {
+    color: var(--accent);
+    background-color: var(--accent-subtle);
+    outline: 1px solid var(--accent) !important;
+}
+
+#structure-content .msp-plugin .msp-btn:focus-visible,
+#structure-content .msp-plugin :is(button, input, select):focus-visible {
+    outline: 2px solid var(--accent) !important;
+    outline-offset: -2px !important;
+}
+
+/* ── Mol* hover label ───────────────────────────────────────────────────────
+   The residue-on-hover label (bottom of the 3D canvas) is tiny by default.
+   Mol* renders it as `.msp-highlight-info` with one `.msp-highlight-*-row`
+   per line; bump the row font-size to enlarge it. */
+.msp-highlight-info .msp-highlight-simple-row,
+.msp-highlight-info .msp-highlight-markdown-row {
+    font-size: 1.1rem;
+    line-height: 1.4;
+}
+
+/* ── Methods overview ───────────────────────────────────────────────────── */
+.methods-toc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.55rem 1.25rem;
+    margin: 0 auto 1.5rem;
+    font-size: 0.85rem;
+}
+
+.methods-toc-label {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.methods-section {
+    scroll-margin-top: 1.5rem;
+}
+
+.methods-intro {
+    max-width: 74ch;
+    color: var(--text-muted);
+}
+
+.methods-workflow-figure {
+    margin: 1.5rem 0;
+}
+
+.methods-workflow {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.methods-workflow-step {
+    position: relative;
+    min-width: 0;
+}
+
+.methods-workflow-step:not(:last-child)::after {
+    content: "→";
+    position: absolute;
+    top: 3.25rem;
+    right: -1.35rem;
+    color: var(--text-muted);
+    font-size: 1.35rem;
+}
+
+.methods-workflow-graphic {
+    display: block;
+    width: 100%;
+    height: 136px;
+    margin-bottom: 0.85rem;
+    object-fit: contain;
+}
+
+.methods-workflow-label {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.methods-workflow-number {
+    color: var(--heading);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.methods-workflow-step h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.35;
+}
+
+.methods-workflow-step p {
+    margin-bottom: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.methods-workflow-caption {
+    margin-top: 1.25rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+.methods-details {
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+
+.methods-details summary {
+    width: fit-content;
+    max-width: 100%;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.methods-details[open] summary {
+    margin-bottom: 1rem;
+}
+
+.methods-details dd {
+    margin-bottom: 0.85rem;
+}
+
+.methods-source-link {
+    margin: 1rem 0 0;
+    font-size: 0.9rem;
+}
+
+.methods-score-definitions {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: 1rem 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.methods-score-definitions dd {
+    margin: 0;
+}
+
+@media (min-width: 600px) and (max-width: 1279.98px) {
+    .methods-workflow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2rem;
+    }
+
+    .methods-workflow-step:nth-child(2)::after {
+        content: none;
+    }
+}
+
+@media (max-width: 599.98px) {
+    .methods-toc {
+        justify-content: flex-start;
+        gap: 0.55rem 1rem;
+    }
+
+    .methods-toc-label {
+        flex-basis: 100%;
+    }
+
+    .methods-workflow {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2rem;
+    }
+
+    .methods-workflow-step {
+        display: grid;
+        grid-template-columns: 92px minmax(0, 1fr);
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .methods-workflow-graphic {
+        height: 100px;
+        margin-bottom: 0;
+    }
+
+    .methods-workflow-step:not(:last-child)::after {
+        content: "↓";
+        top: calc(100% + 0.15rem);
+        right: auto;
+        left: 2.35rem;
+    }
+
+    .methods-score-definitions {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.2rem;
+    }
+
+    .methods-score-definitions dd {
+        margin-bottom: 0.85rem;
+    }
+}
+
+/* ── Responsive layout ──────────────────────────────────────────────────── */
+/* Let identifiers wrap inside their column instead of widening the page. */
+.profile-panel {
+    overflow-wrap: anywhere;
+}
+
+.mode-row > * {
+    min-width: 0;
+}
+
+/* Keep the JASPAR reference and DBD similarity together beside the logo. */
+@media (min-width: 768px) {
+    .mode-row > .profile-col {
+        width: max(33.333333%, 22rem);
+    }
+
+    .mode-row > .profile-col + .col-md-8 {
+        flex: 1;
+        width: 0;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .structure-confidence-card {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .confidence-panel {
+        border-left: 0;
+        border-top: 1px solid var(--border);
+        padding-left: 0;
+        padding-top: 24px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .structure-confidence-card .confidence-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 991.98px) {
+    #sidebar {
+        position: static;
+        width: 100%;
+        padding: 0.9rem 1rem 0.5rem;
+    }
+
+    .sidebar-title {
+        margin-bottom: 0.6rem;
+        padding-left: 0;
+    }
+
+    .sidebar-nav {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+
+    .sidebar-nav .nav-link {
+        padding: 0.45rem 0.65rem;
+        border-radius: 4px;
+    }
+
+    #content {
+        margin: 0;
+        padding: 1.25rem 1rem;
+    }
+
+    #content .container {
+        max-width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding: 1.25rem;
+    }
+
+    .home-hero {
+        padding: 1.25rem;
+    }
+
+    .home-hero-title {
+        font-size: 2.25rem;
+    }
+
+    .home-hero-cta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .home-hero-cta .btn {
+        margin-right: 0 !important;
+    }
+
+    #structure-content {
+        height: clamp(300px, 90vw, 480px);
+    }
+}
+
+@media (max-width: 767.98px) {
+    #content h1 {
+        font-size: 2rem;
+    }
+
+    .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.5rem;
+    }
+
+    .stat-tile {
+        width: auto;
+        min-width: 0;
+        max-width: none;
+        padding: 0.65rem 0.45rem;
+    }
+
+    .stat-value {
+        font-size: 1.6rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+        line-height: 1.35;
+    }
+
+    .profile-col {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .alternate-modes-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* Each mobile collection keeps its two clearly labelled download buttons. */
+    .download-table thead {
+        display: none;
+    }
+
+    .download-table tbody {
+        display: block;
+    }
+
+    .download-table tbody tr {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .download-table tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    .download-table td {
+        flex: 1 1 260px;
+        min-width: 0;
+        padding: 0;
+        border: none;
+    }
+
+    .download-table td:first-child {
+        flex-basis: 100%;
+        width: 100% !important;
+    }
+
+    .download-table .download-file-button {
+        width: 100%;
+        white-space: normal;
+    }
+}
+
+@media (max-width: 399.98px) {
+    .profile-key {
+        width: 7rem;
+    }
+}
+
+/* ── First-visit examples ───────────────────────────────────────────────── */
+.home-example-eyebrow {
+    color: var(--accent-hover);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.035em;
+    margin-bottom: 0.45rem;
+    text-transform: uppercase;
+}
+
+.home-example-intro {
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+}
+
+.home-example-visuals {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.home-example-figure {
+    min-width: 0;
+    margin: 0;
+}
+
+.home-example-label {
+    color: var(--heading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+#home-example-logo {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: fill;
+}
+
+.home-example-structure {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+}
+
+.home-example-caption {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    margin-top: 0.6rem;
+    overflow-wrap: anywhere;
+}
+
+.home-example-caption code {
+    color: var(--text-muted);
+}
+
+.search-examples {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.35rem 0.85rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: -0.2rem 0 0.85rem;
+}
+
+/* Search guidance is visible until a transcription factor is selected. */
+.search-empty-state h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.65rem;
+}
+
+.search-empty-intro {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.search-empty-guide {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.search-empty-guide h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.search-empty-guide p,
+.search-empty-note {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.search-empty-guide p {
+    margin-bottom: 0;
+}
+
+.search-empty-note {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.search-empty-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 767.98px) {
+    .home-example-visuals {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.4rem;
+    }
+
+    .search-examples {
+        column-gap: 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    .search-empty-guide {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.1rem;
+    }
+}

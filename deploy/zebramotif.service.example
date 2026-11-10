@@ -1,0 +1,43 @@
+# Replace @APP_ROOT@, @DATA_ROOT@, @APP_USER@, and @APP_GROUP@ before installing.
+# Install the dataset at @DATA_ROOT@ before starting this service.
+[Unit]
+Description=ZebraMotif web application
+After=network.target
+# Retry an unavailable app every five seconds without exhausting a restart quota.
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=@APP_USER@
+Group=@APP_GROUP@
+WorkingDirectory=@APP_ROOT@
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=ZEBRAMOTIF_DATA_DIR=@DATA_ROOT@
+Environment=MPLCONFIGDIR=/var/cache/zebramotif/matplotlib
+CacheDirectory=zebramotif
+CacheDirectoryMode=0750
+ExecStart=@APP_ROOT@/.venv/bin/python -m gunicorn zebramotif.app:server \
+    --bind 127.0.0.1:8568 \
+    --worker-class gthread \
+    --workers 2 \
+    --threads 4 \
+    --timeout 120 \
+    --graceful-timeout 30 \
+    --forwarded-allow-ips 127.0.0.1 \
+    --access-logfile - \
+    --error-logfile -
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=always
+RestartSec=5s
+KillMode=mixed
+TimeoutStopSec=45s
+StandardOutput=journal
+StandardError=journal
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+
+[Install]
+WantedBy=multi-user.target

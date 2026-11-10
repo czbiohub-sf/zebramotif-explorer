@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Downloaded datasets belong outside the source package.
+.data/
+src/zebramotif/data/
+
+# Deployment secrets (Zenodo share links must never be committed).
+.env
+.env.*
+!.env.example
+.secrets/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Tooling caches
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Runtime logs
+*.log

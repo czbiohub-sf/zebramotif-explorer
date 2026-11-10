@@ -1,0 +1,65 @@
+[project]
+name = "zebramotif"
+version = "0.1.0"
+description = "Interactive Dash app for browsing AlphaFold 3-predicted zebrafish TF binding motifs (PWMs)."
+readme = "README.md"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md", "notices/*"]
+authors = [
+    { name = "Benjamin Iovino", email = "benjamin.iovino@czbiohub.org" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "dash[compress]>=3.0.3",
+    "dash-bootstrap-components>=2.0.2",
+    "dash-molstar>=1.3.2",
+    "gunicorn>=21.0.0",
+    "matplotlib>=3.8.0",
+    "numpy>=2.3.1",
+    "pandas>=2.2.0",
+    "plotly>=6.0.1",
+    "pyarrow>=16.0.0",
+]
+
+[project.scripts]
+zebramotif = "zebramotif:main"
+zebramotif-download-data = "zebramotif.dataset:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/zebramotif"]
+
+[tool.hatch.build.targets.sdist]
+# Ship project sources and configuration without machine-local files or notes.
+include = [
+    "/src/zebramotif/**",
+    "/tests/**",
+    "/deploy/**",
+    "/notices/**",
+    "/.github/**",
+    "/.dockerignore",
+    "/.gitignore",
+    "/.pre-commit-config.yaml",
+    "/Dockerfile",
+    "/LICENSE",
+    "/README.md",
+    "/SECURITY.md",
+    "/CODE_OF_CONDUCT.md",
+    "/THIRD_PARTY_NOTICES.md",
+    "/pyproject.toml",
+    "/uv.lock",
+]
+
+[tool.hatch.build]
+exclude = [
+    "src/zebramotif/data/**",
+    "release/**",
+    "dist/**",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.6.0",
+]

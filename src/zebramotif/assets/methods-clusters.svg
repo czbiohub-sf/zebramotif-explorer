@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="136" viewBox="0 0 240 136">
+  <title>Schematic clustering of similar nucleotide preferences</title>
+  <g fill="none" stroke="#8b929d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M29 78H58M58 38.5V122M58 38.5H98M58 122H82M82 91V122M82 91H122M82 122H144"/>
+  </g>
+  <g fill="none" stroke="#5279ae" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M98 25.5V51.5M98 25.5H143M98 51.5H143M143 19V32M143 19H191M143 32H191M143 45V58M143 45H191M143 58H191"/>
+  </g>
+  <g fill="#5279ae">
+    <circle cx="196" cy="19" r="4.5"/><circle cx="196" cy="32" r="4.5"/>
+    <circle cx="196" cy="45" r="4.5"/><circle cx="196" cy="58" r="4.5"/>
+  </g>
+  <g fill="none" stroke="#b97b3c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M122 78V104M122 78H191M122 91H191M122 104H191"/>
+  </g>
+  <g fill="#b97b3c">
+    <circle cx="196" cy="78" r="4.5"/><circle cx="196" cy="91" r="4.5"/>
+    <circle cx="196" cy="104" r="4.5"/>
+  </g>
+  <g fill="none" stroke="#4e9186" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M144 118V131M144 118H191M144 131H191"/>
+  </g>
+  <g fill="#4e9186">
+    <circle cx="196" cy="118" r="4.5"/><circle cx="196" cy="131" r="4.5"/>
+  </g>
+</svg>

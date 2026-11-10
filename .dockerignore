@@ -1,0 +1,19 @@
+# Allow only the files needed by the image build. In particular, exclude local
+# datasets, virtual environments, logs, Git history, and deployment secrets.
+**
+!Dockerfile
+!pyproject.toml
+!uv.lock
+!README.md
+!LICENSE
+!THIRD_PARTY_NOTICES.md
+!notices/
+!notices/**
+!src/
+!src/zebramotif/
+!src/zebramotif/**
+!deploy/
+!deploy/start.sh
+src/zebramotif/data/
+**/__pycache__/
+**/*.py[cod]

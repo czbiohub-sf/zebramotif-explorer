@@ -1,0 +1,17 @@
+{
+  "scope": "AlphaFold 3 notices accompanying the bundled scientific illustrations.",
+  "documents": [
+    {
+      "filename": "AF3_OUTPUT_TERMS_OF_USE.md",
+      "url": "https://github.com/google-deepmind/alphafold3/blob/main/OUTPUT_TERMS_OF_USE.md",
+      "download_url": "https://raw.githubusercontent.com/google-deepmind/alphafold3/main/OUTPUT_TERMS_OF_USE.md",
+      "last_modified": "2024-11-09",
+      "verified_date": "2026-10-21",
+      "sha256": "7ab1c4ef16a8fe88db3ccef813a5e28dec63b1e2d336876e5ae60b6d6b4686b8"
+    },
+    {
+      "filename": "Legally Binding Terms of Use.txt",
+      "source": "Required redistribution notice in section 5.1 of AF3_OUTPUT_TERMS_OF_USE.md; copied from the installed ZebraMotif dataset."
+    }
+  ]
+}
