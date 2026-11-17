@@ -6,3 +6,9 @@ stack:
       env:
         - name: ZEBRAMOTIF_DOWNLOADS
           value: "off"
+      gateway:
+        enabled: true
+        rules:
+          - host: zebramotif.apps.czbiohub.org
+            vanity:
+              enabled: true
