@@ -11,6 +11,7 @@ from dash.exceptions import PreventUpdate
 
 from zebramotif import data as catalog
 from zebramotif.components import build_sidebar, build_site_footer
+from zebramotif.downloads import DOWNLOADS_ENABLED
 from zebramotif.pages import downloads, home, methods, not_found, search
 from zebramotif.routes import register_routes
 
@@ -60,7 +61,7 @@ class Page(NamedTuple):
 PAGES = {
     "/": Page("Home", home),
     "/search": Page("Search", search),
-    "/downloads": Page("Downloads", downloads),
+    **({"/downloads": Page("Downloads", downloads)} if DOWNLOADS_ENABLED else {}),
     "/methods": Page("Methods & Cite", methods),
 }
 

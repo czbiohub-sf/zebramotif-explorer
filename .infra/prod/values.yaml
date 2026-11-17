@@ -1,0 +1,8 @@
+stack:
+  services:
+    app:
+      image:
+        tag: sha-TO-BE-REPLACED-BY-BUILDER-WORKFLOW
+      env:
+        - name: ZEBRAMOTIF_DOWNLOADS
+          value: "off"

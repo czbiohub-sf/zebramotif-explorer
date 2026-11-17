@@ -38,7 +38,8 @@ a specific dataset directory. To install an archive supplied by the maintainers,
 place `zebramotif-data-0.1.zip` and its matching `.zip.sha256` file together,
 then run `uv run python -m zebramotif.dataset --archive /path/to/zebramotif-data-0.1.zip`.
 Run `uv run python -m zebramotif.dataset --check` to verify the installed files.
-See the [hosting guide](deploy/README.md) for an optional Linux service.
+See the [Argus deployment guide](deploy/argus.md) for the public website and the
+[hosting guide](deploy/README.md) for an optional Linux service.
 
 ## Development
 

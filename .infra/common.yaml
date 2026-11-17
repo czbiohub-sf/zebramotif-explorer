@@ -1,0 +1,81 @@
+stack:
+  global:
+    replicaCount: 1
+    autoscaling:
+      enabled: false
+    service:
+      port: 8568
+    nodeSelector:
+      kubernetes.io/arch: arm64
+
+  services:
+    app:
+      image:
+        repository: 533267185808.dkr.ecr.us-west-2.amazonaws.com/core-platform/zebramotif-explorer/app
+      resources:
+        limits:
+          cpu: "1"
+          memory: 2Gi
+        requests:
+          cpu: 500m
+          memory: 1Gi
+      # ReadWriteOnce dataset volume: one pod at a time.
+      strategy:
+        type: Recreate
+      progressDeadlineSeconds: 900
+      serviceAccount:
+        automount: false
+      podSecurityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop: [ALL]
+      volumes:
+        - name: dataset
+          persistentVolumeClaim:
+            claimName: "{{ .Release.Name }}-dataset"
+        - name: tmp
+          emptyDir:
+            sizeLimit: 256Mi
+      volumeMounts:
+        - name: dataset
+          mountPath: /var/lib/zebramotif/datasets
+        - name: tmp
+          mountPath: /tmp
+      # exec, not httpGet: the chart drops httpGet when its default exec is present.
+      startupProbe:
+        enabled: true
+        exec:
+          command:
+            - /app/.venv/bin/python
+            - -c
+            - "from urllib.request import urlopen; urlopen('http://127.0.0.1:8568/healthz', timeout=3).close()"
+        periodSeconds: 5
+        timeoutSeconds: 5
+        failureThreshold: 120
+      readinessProbe:
+        httpGet:
+          path: /healthz
+          port: http
+        initialDelaySeconds: 0
+        timeoutSeconds: 5
+      livenessProbe:
+        httpGet:
+          path: /healthz
+          port: http
+        initialDelaySeconds: 0
+        timeoutSeconds: 5
+      gateway:
+        enabled: true
+        paths:
+          - path: /
+            pathType: Prefix
+      ingress:
+        enabled: false

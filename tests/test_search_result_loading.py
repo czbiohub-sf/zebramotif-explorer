@@ -76,8 +76,10 @@ class SearchResultLoadingTests(unittest.TestCase):
     def test_unresolved_query_shows_its_identity_without_waiting_for_missing_motifs(
         self,
     ):
-        dbid = catalog.TF2REP.query("resolution == 'unresolved'").iloc[0]["DBID"]
-        result = self.render(result_payload(dbid))
+        rows = catalog.TF2REP.query("resolution == 'unresolved'")
+        if rows.empty:
+            self.skipTest("This dataset release has no unresolved queries")
+        result = self.render(result_payload(rows.iloc[0]["DBID"]))
         self.assertEqual(result["tf-result-panel"]["style"], {})
         self.assertIn("No predicted PPM", json.dumps(result["overview-content"]))
         self.assertEqual(result["primary-section"]["style"], {"display": "none"})

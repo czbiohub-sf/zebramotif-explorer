@@ -40,6 +40,8 @@ include = [
     "/notices/**",
     "/.github/**",
     "/.dockerignore",
+    "/.argus-ci.yaml",
+    "/.infra/**",
     "/.gitignore",
     "/.pre-commit-config.yaml",
     "/Dockerfile",
@@ -55,6 +57,7 @@ include = [
 [tool.hatch.build]
 exclude = [
     "src/zebramotif/data/**",
+    ".infra/**/charts/**",
     "release/**",
     "dist/**",
 ]

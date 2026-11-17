@@ -3,6 +3,7 @@
 import hashlib
 import io
 import json
+import os
 import zipfile
 from functools import lru_cache
 from pathlib import Path
@@ -13,6 +14,14 @@ from flask import Response, abort
 from zebramotif.utils import meme_document
 
 Collection = Literal["primary", "all"]
+
+# ZEBRAMOTIF_DOWNLOADS=off hides download links and refuses every motif file route.
+DOWNLOADS_ENABLED = os.environ.get("ZEBRAMOTIF_DOWNLOADS", "on").strip().lower() not in {
+    "off",
+    "0",
+    "false",
+    "no",
+}
 
 _MODE_COLUMNS = [
     "DBID",

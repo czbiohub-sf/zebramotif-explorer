@@ -23,7 +23,13 @@ class TFResultTests(unittest.TestCase):
         self.client = dashboard.server.test_client()
         self.cluster = catalog.TF2REP.query("TF_Name == 'nfatc4'").iloc[0]
         self.redirect = catalog.TF2REP.query("resolution == 'symbol_redirect'").iloc[0]
-        self.unresolved = catalog.TF2REP.query("resolution == 'unresolved'").iloc[0]
+
+    def unresolved(self):
+        """Return a query without predictions, or skip when the release has none."""
+        rows = catalog.TF2REP.query("resolution == 'unresolved'")
+        if rows.empty:
+            self.skipTest("This dataset release has no unresolved queries")
+        return rows.iloc[0]
 
     def header(self, dbid):
         response = self.client.post(
@@ -92,8 +98,8 @@ class TFResultTests(unittest.TestCase):
         dbid = counts[counts.eq(1)].index[0]
         self.assertEqual(self.assert_download(dbid), 1)
 
-    def test_unknown_and_unresolved_downloads_do_not_return_empty_documents(self):
-        for dbid in ["unknown", "ENSDARG00000010132_99", self.unresolved["DBID"]]:
+    def test_unknown_downloads_do_not_return_empty_documents(self):
+        for dbid in ["unknown", "ENSDARG00000010132_99"]:
             with self.subTest(dbid=dbid):
                 response = self.client.get(f"/motifs/tf/{dbid}.meme")
                 self.assertEqual(response.status_code, 404)
@@ -193,10 +199,13 @@ class TFResultTests(unittest.TestCase):
                 )
 
     def test_unresolved_query_retains_identity_and_sharing_without_a_download(self):
-        result = self.header(self.unresolved["DBID"])
+        unresolved = self.unresolved()
+        result = self.header(unresolved["DBID"])
+        response = self.client.get(f"/motifs/tf/{unresolved['DBID']}.meme")
+        self.assertEqual(response.status_code, 404)
         self.assertEqual(result["tf-result-panel"]["style"], {})
         self.assertIn(
-            self.unresolved["TF_Name"],
+            unresolved["TF_Name"],
             json.dumps(result["tf-result-identity"]["children"]),
         )
         self.assertFalse(result["copy-tf-link"]["disabled"])

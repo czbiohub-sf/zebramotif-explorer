@@ -5,7 +5,7 @@ from urllib.parse import urlsplit
 from flask import Response, abort, request, send_from_directory
 
 from zebramotif import data as catalog
-from zebramotif.downloads import register_download_routes
+from zebramotif.downloads import DOWNLOADS_ENABLED, register_download_routes
 from zebramotif.navigation import synchronize_tf_search
 from zebramotif.utils import MEME_HEADER, meme_document, meme_record
 
@@ -22,7 +22,7 @@ def register_routes(app, pages):
     @server.get("/motifs/<motif_id>.txt")
     def motif_text(motif_id):
         """Open one primary or alternate PPM as a complete plain-text MEME document."""
-        if motif_id not in catalog.MODES_BY_MOTIF_ID.index:
+        if not DOWNLOADS_ENABLED or motif_id not in catalog.MODES_BY_MOTIF_ID.index:
             abort(404)
         mode = catalog.MODES_BY_MOTIF_ID.loc[motif_id]
         text = (
@@ -40,7 +40,7 @@ def register_routes(app, pages):
     @server.get("/motifs/tf/<dbid>.meme")
     def tf_motif_download(dbid):
         """Download the selected query's primary and all available alternate motifs."""
-        modes = catalog.modes_for_query(dbid)
+        modes = catalog.modes_for_query(dbid) if DOWNLOADS_ENABLED else None
         if modes is None:
             abort(404)
         return Response(
@@ -137,4 +137,5 @@ def register_routes(app, pages):
             "sideUpdate": {"url": {"refresh": True, "href": pathname + search}},
         }
 
-    register_download_routes(server, catalog.DOWNLOADS)
+    if DOWNLOADS_ENABLED:
+        register_download_routes(server, catalog.DOWNLOADS)
