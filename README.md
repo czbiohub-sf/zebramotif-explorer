@@ -12,7 +12,8 @@ Until then, dataset access is available from the maintainers.
 - Search transcription factors by gene symbol or Ensembl ID.
 - Compare primary and alternate binding motifs with JASPAR ortholog motifs.
 - Explore 3D structures, DNA-binding domains, DNA contacts, and confidence scores.
-- Download motifs and metadata, or share a link to a selected transcription factor.
+- Download motifs and metadata (on the public site at release), or share a link
+  to a selected transcription factor.
 
 The app's **Methods & Cite** page explains the methods, metrics, and citations.
 
