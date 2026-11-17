@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://chanzuckerberg.github.io/argus/schemas/argus-ci.schema.json
+version: 1
+
+apps:
+  zebramotif-explorer:
+    build:
+      filters:
+        branches: ["main"]
+        paths:
+          - "Dockerfile"
+          - ".dockerignore"
+          - "pyproject.toml"
+          - "uv.lock"
+          - "README.md"
+          - "LICENSE"
+          - "THIRD_PARTY_NOTICES.md"
+          - "notices/**"
+          - "src/**"
+          - "deploy/start.sh"
+      images:
+        app:
+          context: ./
+          dockerfile: ./Dockerfile
+    envs:
+      prod:
+        deploy:
+          manifest_update: on_build
+          stack_upsert: on_build
+          wait_for_sync_seconds: 900
+          filters:
+            branches: ["main"]

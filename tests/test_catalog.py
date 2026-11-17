@@ -41,7 +41,7 @@ class CatalogTests(unittest.TestCase):
 
     def test_homepage_counts_genes_without_counting_their_domain_entries(self):
         self.assertEqual(catalog.N_TFS, 2543)
-        self.assertEqual(len(catalog.TF2REP), 2551)
+        self.assertEqual(len(catalog.TF2REP), 2550)
         self.assertEqual(catalog.TF2REP["sequence_type"].eq("domain").sum(), 7)
         self.assertEqual(catalog.TF2REP["in_original_catalog"].sum(), 2543)
         domains = catalog.TF2REP.loc[catalog.TF2REP["sequence_type"].eq("domain")]
@@ -60,25 +60,25 @@ class CatalogTests(unittest.TestCase):
             .all()
         )
 
-    def test_pogza_has_searchable_predictions_and_annotations(self):
-        dbid = "ENSDARG00000054778"
+    def test_ahrrb_has_searchable_predictions_and_annotations(self):
+        dbid = "ENSDARG00000052618"
         selected = catalog.TF2REP_BY_DBID.loc[dbid]
         self.assertEqual(selected["Rep_DBID"], dbid)
         self.assertEqual(selected["resolution"], "self")
         self.assertEqual(selected["sequence_type"], "full_length")
         self.assertTrue(selected["is_representative"])
-        self.assertFalse(selected["in_original_catalog"])
+        self.assertTrue(selected["in_original_catalog"])
         self.assertIn(dbid, catalog.MODES_BY_DBID)
         self.assertIn(dbid, catalog.DBD_BY_DBID)
         self.assertIn(dbid, catalog.CONTACTS_BY_DBID)
         self.assertIn(dbid, catalog.CONFIDENCE_BY_DBID)
         self.assertIn(
-            "pogza",
+            "ahrrb",
             text_content(search.update_result_header(dbid)["tf_result_identity"]),
         )
-        response = dashboard.server.test_client().get("/motifs/ZM00000054778.1.txt")
+        response = dashboard.server.test_client().get("/motifs/ZM00000052618.1.txt")
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b"MOTIF ZM00000054778.1 pogza", response.data)
+        self.assertIn(b"MOTIF ZM00000052618.1 ahrrb", response.data)
 
     def test_profiles_omit_sequence_type(self):
         for kind in ("full_length", "domain"):

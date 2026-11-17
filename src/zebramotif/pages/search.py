@@ -10,6 +10,7 @@ from dash.exceptions import PreventUpdate
 
 from zebramotif import data as catalog
 from zebramotif import structure_viewer
+from zebramotif.downloads import DOWNLOADS_ENABLED
 from zebramotif.navigation import synchronize_tf_search
 from zebramotif.plot_logo import plot_logo, reverse_complement
 from zebramotif.utils import as_pwm, base_gene_dbid, display_tf_name, format_number
@@ -107,7 +108,9 @@ layout = html.Div(
                 html.Div(
                     [
                         dcc.Link("How predictions are made →", href="/methods"),
-                        dcc.Link("Download motif matrices →", href="/downloads"),
+                        dcc.Link("Download motif matrices →", href="/downloads")
+                        if DOWNLOADS_ENABLED
+                        else None,
                     ],
                     className="search-empty-links",
                 ),
@@ -161,6 +164,9 @@ layout = html.Div(
                                                     external_link=True,
                                                     disabled=True,
                                                     title="Download the primary and all available alternate motifs",
+                                                    style=None
+                                                    if DOWNLOADS_ENABLED
+                                                    else {"display": "none"},
                                                 ),
                                             ],
                                             className="tf-result-buttons",
@@ -867,17 +873,25 @@ def _tf_identity(sel: pd.Series, dbid) -> html.Div:
     )
 
 
+def _motif_id_link(motif_id: str, **attributes):
+    """Link a PPM ID to its MEME file, or show plain text while downloads are off."""
+    if not DOWNLOADS_ENABLED:
+        return motif_id
+    return html.A(
+        motif_id,
+        href=f"/motifs/{motif_id}.txt",
+        target="_blank",
+        rel="noopener noreferrer",
+        **attributes,
+    )
+
+
 def _primary_profile(primary: pd.Series) -> html.Div:
     """Primary motif identifier, support, and JASPAR comparisons."""
     identity = [
         (
             "PPM ID",
-            html.A(
-                primary["motif_id"],
-                href=f"/motifs/{primary['motif_id']}.txt",
-                target="_blank",
-                rel="noopener noreferrer",
-            ),
+            _motif_id_link(primary["motif_id"]),
         ),
     ]
 
@@ -905,13 +919,7 @@ def _mode_profile(row: pd.Series) -> html.Div:
     items = [
         (
             "PPM ID",
-            html.A(
-                row["motif_id"],
-                href=f"/motifs/{row['motif_id']}.txt",
-                target="_blank",
-                rel="noopener noreferrer",
-                title="Open MEME motif file",
-            ),
+            _motif_id_link(row["motif_id"], title="Open MEME motif file"),
         ),
         ("Support", _metric_badge(row, "support")),
         ("Motif similarity", _metric_badge(row, "homer_sim")),
@@ -999,9 +1007,9 @@ def update_result_header(dbid):
         "tf_result_note": note,
         "copy_tf_link_disabled": False,
         "download_tf_motifs_href": f"/motifs/tf/{dbid}.meme"
-        if modes is not None
+        if modes is not None and DOWNLOADS_ENABLED
         else None,
-        "download_tf_motifs_disabled": modes is None,
+        "download_tf_motifs_disabled": modes is None or not DOWNLOADS_ENABLED,
     }
 
 

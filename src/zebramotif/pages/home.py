@@ -8,6 +8,7 @@ from dash import Input, Output, State, dcc, html
 from dash.exceptions import PreventUpdate
 
 from zebramotif import data as catalog
+from zebramotif.downloads import DOWNLOADS_ENABLED
 
 HOME_EXAMPLE_DBID = "ENSDARG00000040465"  # irf2
 
@@ -165,7 +166,9 @@ layout = html.Div(
                         ),
                     ],
                     className="home-hero-cta",
-                ),
+                )
+                if DOWNLOADS_ENABLED
+                else None,
             ],
         ),
         html.Section(

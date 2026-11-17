@@ -2,6 +2,8 @@
 
 For dataset installation and access, see [Run locally](../README.md#run-locally).
 
+For the public website, see the [Argus deployment guide](argus.md).
+
 ## Linux service
 
 The optional [systemd service example](zebramotif.service.example) runs Gunicorn

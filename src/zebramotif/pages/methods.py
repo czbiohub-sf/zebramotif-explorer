@@ -6,6 +6,7 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html
 
 from zebramotif import data as catalog
+from zebramotif.downloads import DOWNLOADS_ENABLED
 
 AF3_OUTPUT_TERMS_URL = (
     "https://github.com/google-deepmind/alphafold3/blob/main/OUTPUT_TERMS_OF_USE.md"
@@ -449,8 +450,11 @@ def build_methods_page(counts: Mapping[str, int] | None = None) -> html.Div:
                                 "Provenance",
                                 href="/documents/PROVENANCE.json",
                             ),
-                            " · ",
-                            dcc.Link("Download motifs", href="/downloads"),
+                            *(
+                                [" · ", dcc.Link("Download motifs", href="/downloads")]
+                                if DOWNLOADS_ENABLED
+                                else []
+                            ),
                         ],
                         className="mb-0",
                     ),

@@ -17,5 +17,6 @@ exec "$app_python" -m gunicorn zebramotif.app:server \
     --workers 2 \
     --threads 4 \
     --timeout 120 \
+    --no-control-socket \
     --access-logfile - \
     --error-logfile -
