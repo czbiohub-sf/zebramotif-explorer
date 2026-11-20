@@ -3,9 +3,6 @@ stack:
     app:
       image:
         tag: sha-a7a90cf
-      env:
-        - name: ZEBRAMOTIF_DOWNLOADS
-          value: "off"
       gateway:
         enabled: true
         rules:

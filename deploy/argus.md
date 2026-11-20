@@ -23,8 +23,9 @@ argus list stacks --app zebramotif-explorer --env prod
 
 To roll back, restore a previous image tag in `.infra/prod/values.yaml`.
 
-Downloads are off in prod (`ZEBRAMOTIF_DOWNLOADS=off` in `.infra/prod/values.yaml`).
-Remove that entry to turn them back on.
+Downloads are enabled by default. To disable them in prod, set
+`ZEBRAMOTIF_DOWNLOADS` to `"off"` under `stack.services.app.env` in
+`.infra/prod/values.yaml`. Remove the entry to enable downloads again.
 
 The dataset is cached on a 2 GiB volume at `/var/lib/zebramotif/datasets`, so
 only the first start downloads it.
