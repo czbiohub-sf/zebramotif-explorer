@@ -26,6 +26,18 @@ GOOGLE_FONTS = (
     "family=Hanken+Grotesk:wght@400;500;600;700&"
     "family=STIX+Two+Text:wght@500;600;700&display=swap"
 )
+PLAUSIBLE_SNIPPET = """\
+        <!-- Privacy-friendly analytics by Plausible -->
+        <script async src="https://plausible.io/js/pa-yfMHF5xpZE2wdSbWtEmtE.js"></script>
+        <script>
+            window.plausible = window.plausible || function () {
+                (window.plausible.q = window.plausible.q || []).push(arguments);
+            };
+            window.plausible.init = window.plausible.init || function (options) {
+                window.plausible.o = options || {};
+            };
+            window.plausible.init();
+        </script>"""
 
 app = dash.Dash(
     __name__,
@@ -44,10 +56,14 @@ app = dash.Dash(
     compress=True,
     suppress_callback_exceptions=True,
 )
-app.index_string = app.index_string.replace("<html>", '<html lang="en">').replace(
-    "{%favicon%}",
-    '{%favicon%}\n        <link rel="icon" type="image/svg+xml"'
-    f' href="{app.get_asset_url("favicon.svg")}">',
+app.index_string = (
+    app.index_string.replace("<html>", '<html lang="en">')
+    .replace(
+        "{%favicon%}",
+        '{%favicon%}\n        <link rel="icon" type="image/svg+xml"'
+        f' href="{app.get_asset_url("favicon.svg")}">',
+    )
+    .replace("{%css%}", "{%css%}\n" + PLAUSIBLE_SNIPPET, 1)
 )
 server = app.server
 
