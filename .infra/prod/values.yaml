@@ -2,7 +2,7 @@ stack:
   services:
     app:
       image:
-        tag: sha-a7a90cf
+        tag: sha-605f4f8
       gateway:
         enabled: true
         rules:
